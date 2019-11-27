@@ -1,0 +1,251 @@
+.cover {
+  margin-top: -56px;
+}
+.custom-carousel-item {
+  height: 100vh;
+  width: 100vw;
+  min-height: 350px;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: cover;
+}
+
+.custom-carousel-item-1 {
+  background-image: url("https://source.unsplash.com/Jy4-xk34q0s/2048x1536");
+}
+
+.custom-carousel-item-2 {
+  background-image: url("https://source.unsplash.com/dYYv2PMRMV8/2048x1536");
+}
+
+.custom-carousel-item-3 {
+  background-image: url("https://source.unsplash.com/pYFue5PzpcI/2048x1536");
+}
+
+.wrapper {
+  display: block;
+}
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100vh;
+  z-index: 9999;
+  background: var(--primary);
+  color: #fff;
+  transition: all 0.3s;
+  overflow-y: scroll;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+/* display .overlay when it has the .active class */
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+#dismiss {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background: var(--primary);
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.sideDrawer {
+  border-bottom: var(--light) 1px solid;
+}
+
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url("https://source.unsplash.com/WEQbe2jBg40/600x1200");
+  background-size: cover;
+  background-position: center;
+}
+
+.login-heading {
+  font-weight: 300;
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+}
+
+.btn-details {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+}
+
+.no-match {
+  margin-top: 100px;
+}
+
+.main {
+  position: relative;
+  top: 56px;
+}
+
+.card-columns {
+  display: inline-block;
+}
+
+.card-image-overlay {
+  position: relative;
+  /*Media query needed*/
+  width: 100%;
+  align-self: flex-end;
+  margin-right: 2px;
+  margin-top: -50px;
+  margin-bottom: 0.75rem;
+  font-size: 1.8rem;
+  text-align: right;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.tour-card-title-text {
+  line-height: 1;
+  padding-left: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image: linear-gradient(
+    to bottom right,
+    var(--primary),
+    rgba(40, 180, 135, 0.85)
+  );
+}
+
+.tour-card-image {
+  clip-path: polygon(0 0, 100% 0%, 100% 83%, 0% 98%);
+}
+
+.tour-icons {
+  color: var(--primary);
+}
+
+.tour-pointer {
+  white-space: nowrap
+}
+
+.tour-review {
+  color: var(--primary)
+}
+
+.tour-detail-jumbo {
+  max-width: 100%;
+  height: auto;
+}
+
+.test-jumbo {
+  background-image: url("https://source.unsplash.com/_UIN-pFfJ7c/2048x1536");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /*Media query needed*/
+  height: 400px;
+  border-radius: 
+}
+
+.jumbo-image-overlay {
+  position: relative;
+  /*Media query needed*/
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: normal;
+  line-height: 1.4;
+  border-radius: 2px;
+}
+
+.jumbo-title-text {
+  line-height: 1;
+  padding: 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image: linear-gradient(
+    to bottom right,
+    var(--primary),
+    rgba(40, 180, 135, 0.7)
+  );
+  border-radius: 2px;
+}
+
+/*Extra small devices (portrait phones, less than 576px)
+No media query for `xs` since this is the default in Bootstrap*/
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .test-jumbo {
+    height: 450px;
+  } 
+  .card-image-overlay {
+    width: 90%;
+  }
+ }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  .test-jumbo {
+    height: 500px;
+  }
+  .card-image-overlay {
+    width: 70%;
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .test-jumbo {
+    height: 550px;
+  }
+  .card-image-overlay {
+    width: 60%;
+  }
+ }
+
+
