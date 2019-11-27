@@ -1,17 +1,14 @@
 import React from "react";
-import {
-  Modal,
-  Button
-} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 type TourModalProps = {
-  onHide: () => void 
-  header: any
-  closeText: string
-  show: boolean
-}
+  onHide: () => void;
+  header: any;
+  closeText: string;
+  show: boolean;
+};
 
-const TourModal: React.FC<TourModalProps> = (props) => {
+const TourModal: React.FC<TourModalProps> = props => {
   return (
     <Modal
       {...props}
@@ -24,16 +21,12 @@ const TourModal: React.FC<TourModalProps> = (props) => {
           {props.header}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {props.children}
-      </Modal.Body>
+      <Modal.Body>{props.children}</Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>{props.closeText}</Button>
       </Modal.Footer>
     </Modal>
-    )
-}
-
-
+  );
+};
 
 export default TourModal;
