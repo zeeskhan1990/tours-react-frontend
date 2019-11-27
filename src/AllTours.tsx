@@ -17,8 +17,10 @@ import {
 } from "react-bootstrap";
 import Rating from "react-rating";
 import TourFilter from "./tour-filter";
+import TourModal from "./tour-modal"
 
 const AllTours: React.FC = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <React.Fragment>
       <Container fluid>
@@ -624,7 +626,11 @@ const AllTours: React.FC = () => {
           </Col>
         </Row>
       </Container>
-      <div className="btn-circle-fab d-lg-none"><i className="fa fa-filter tour-icons"></i></div>
+      <div className="btn-circle-fab d-lg-none" onClick={() => setModalShow(true)}><i className="fa fa-filter tour-icons"></i></div>
+      <TourModal show={modalShow} onHide={() => setModalShow(false)}
+      closeText="Apply" header="Tour Filters">
+        <TourFilter/>
+        </TourModal>
     </React.Fragment>
   );
 };
