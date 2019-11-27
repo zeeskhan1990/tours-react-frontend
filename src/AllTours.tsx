@@ -16,14 +16,7 @@ import {
   FormControl
 } from "react-bootstrap";
 import Rating from "react-rating";
-
-import Carousel from "react-bootstrap/Carousel";
-
-const SVGIcon = (props: { href?: string; className }) => (
-  <svg className={props.className} pointerEvents="none">
-    <use xlinkHref={props.href} />
-  </svg>
-);
+import TourFilter from "./tour-filter";
 
 const AllTours: React.FC = () => {
   return (
@@ -41,78 +34,7 @@ const AllTours: React.FC = () => {
         <Dropdown.Divider />
         <Row noGutters>
           <Col md={2} className="my-3 d-none d-lg-block">
-            <Card>
-              <article className="card-group-item">
-                <Card.Header><h6>Sort By</h6></Card.Header>
-                <div className="fliter-content">
-                  <Card.Body>
-                    <Form>
-                      <Form.Group controlId="sortBy">
-                        <Form.Control as="select">
-                          <option>Price</option>
-                          <option>Duration</option>
-                          <option>Stops</option>
-                          <option>Participants</option>
-                          <option>Best Rated</option>
-                        </Form.Control>
-                      </Form.Group>
-                    </Form>
-                  </Card.Body>
-                </div>
-              </article>
-
-              <article className="card-group-item">
-                <Card.Header><h6>Search By Name</h6></Card.Header>
-                <div className="fliter-content">
-                  <Card.Body>
-                    <Form>
-                      <InputGroup className="mb-3">
-                        <InputGroup.Prepend>
-                          <InputGroup.Text id="basic-addon2"><i className="fas fa-search" /></InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl
-                          placeholder="Tour Name"
-                          aria-label="Recipient's username"
-                          aria-describedby="basic-addon2"
-                        />
-                      </InputGroup>
-                    </Form>
-                  </Card.Body>
-                </div>
-              </article>
-              <article className="card-group-item">
-                <Card.Header><h6>Filters</h6></Card.Header>
-                <div className="fliter-content">
-                  <Card.Body>
-                    <Card.Subtitle className="mb-3">Dates: </Card.Subtitle>
-                    <Form>
-                      <Form.Group controlId="formBasicPassword">
-                        <Form.Control type="text" placeholder="Start After" />
-                      </Form.Group>
-                      <Form.Group controlId="formBasicCheckbox">
-                        <Form.Control type="text" placeholder="End Before" />
-                      </Form.Group>
-                    </Form>
-                    <Card.Subtitle className="mb-3 mt-3">Difficulty: </Card.Subtitle>
-                    <Form>
-                      <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Difficult" />
-                        <Form.Check type="checkbox" label="Moderate" />
-                        <Form.Check type="checkbox" label="Easy" />
-                      </Form.Group>
-                    </Form>
-                    <Card.Subtitle className="mb-3 mt-3">Region: </Card.Subtitle>
-                    <Form>
-                      <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Difficult" />
-                        <Form.Check type="checkbox" label="Moderate" />
-                        <Form.Check type="checkbox" label="Easy" />
-                      </Form.Group>
-                    </Form>
-                  </Card.Body>
-                </div>
-              </article>
-            </Card>
+            <TourFilter/>
           </Col>
           <Col>
             <CardDeck className="m-3">
@@ -702,7 +624,7 @@ const AllTours: React.FC = () => {
           </Col>
         </Row>
       </Container>
-
+      <div className="btn-circle-fab d-lg-none"><i className="fa fa-filter tour-icons"></i></div>
     </React.Fragment>
   );
 };
