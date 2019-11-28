@@ -9,9 +9,9 @@ import {
 const TourFilter: React.FC = () => {
   return (
     <React.Fragment>
-      <Card>
+      <Card border="primary">
         <article className="card-group-item">
-          <Card.Header><h6>Sort By</h6></Card.Header>
+          <Card.Header className="custom-card-header"><h6>Sort By</h6></Card.Header>
           <div className="fliter-content">
             <Card.Body>
               <Form>
@@ -29,7 +29,7 @@ const TourFilter: React.FC = () => {
           </div>
         </article>
         <article className="card-group-item">
-          <Card.Header><h6>Search By Name</h6></Card.Header>
+          <Card.Header className="custom-card-header"><h6>Search By Name</h6></Card.Header>
           <div className="fliter-content">
             <Card.Body>
               <Form>
@@ -48,7 +48,7 @@ const TourFilter: React.FC = () => {
           </div>
         </article>
         <article className="card-group-item">
-          <Card.Header><h6>Filters</h6></Card.Header>
+          <Card.Header className="custom-card-header"><h6>Filters</h6></Card.Header>
           <div className="fliter-content">
             <Card.Body>
               <Card.Subtitle className="mb-3">Dates: </Card.Subtitle>
@@ -71,9 +71,9 @@ const TourFilter: React.FC = () => {
               <Card.Subtitle className="mb-3 mt-3">Region: </Card.Subtitle>
               <Form>
                 <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Difficult" />
-                  <Form.Check type="checkbox" label="Moderate" />
-                  <Form.Check type="checkbox" label="Easy" />
+                  <Form.Check type="checkbox" label="Asia" />
+                  <Form.Check type="checkbox" label="Europe" />
+                  <Form.Check type="checkbox" label="North America" />
                 </Form.Group>
               </Form>
             </Card.Body>
