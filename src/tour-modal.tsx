@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 type TourModalProps = {
   onHide: () => void;
-  header: any;
+  header: React.ElementType | string;
   closeText: string;
   show: boolean;
 };

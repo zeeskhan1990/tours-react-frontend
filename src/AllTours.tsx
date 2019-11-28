@@ -31,9 +31,10 @@ const AllTours: React.FC = () => {
           <Col xs={2} className="my-3 d-none d-lg-block">
             <TourFilter/>
           </Col>
-          <Col >
-            {/*<TourCardDeck/>*/}            
-            <TourCardMap/>
+          <Col className="tour-map-container my-3 ml-3">
+            {/*<TourCardDeck/>*/}
+            <TourCardMap filePath="places.json"/>            
+            {/*<TourCardMap/>*/}
           </Col>
         </Row>
       </Container>
