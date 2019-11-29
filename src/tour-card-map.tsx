@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, CardDeck, Card, Button } from "react-bootstrap";
 import GoogleMapReact from 'google-map-react';
 import { onApiLoad, isFilled} from "./map-utils"
+const classNames = require("classnames")
 
 type InfoWindowProps = {
   place: any
@@ -10,11 +11,22 @@ type InfoWindowProps = {
 const InfoWindow: React.FC<InfoWindowProps> = ({place}) => {
   const handleClick = (ev: any) => {
     ev.preventDefault()
+    //Preventing bubbling up of event to map body
     ev.stopPropagation()
-    console.log("Click on Info Captured", ev)
+    //console.log("Click on Info Captured", ev)
   }
   return (
-    <div className="info-window-style" onClick={handleClick}>
+    <Card border="primary" style={{ width: '14rem' }}>
+      <Card.Img variant="top" src="https://source.unsplash.com/phIFdC6lA4E/512x512" />
+      <Card.Body>
+        <Card.Title>Card Title</Card.Title>
+        <Card.Text>
+          Some quick example text to build on the card title and make up the bulk of
+          the card's content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+      {/*<div className="info-window-style" onClick={handleClick}>
       <div style={{ fontSize: 16 }}>
         {place.name}
       </div>
@@ -27,7 +39,9 @@ const InfoWindow: React.FC<InfoWindowProps> = ({place}) => {
       <div style={{ fontSize: 14, color: 'grey' }}>
         {`$` + place.price}
       </div>
-    </div>
+    </div>*/}
+    </Card>
+    
   );
 };
 
@@ -37,12 +51,21 @@ type MapMarkerProps = {
   lng: number
   text: string
   show: boolean
-  place: any  
+  place: any,
+  $hover?: boolean  
 }
+
+
 const MapMarker: React.FC<MapMarkerProps> = (props: MapMarkerProps) => {
+const  markerClass = classNames({
+  'pin': true,
+  'bounce': true,
+  'pin-pressed': props.show,
+  'pin-over': props.$hover
+});
 return (
   <React.Fragment>
-    <div className="pin bounce">
+    <div className={markerClass}>
       <div className="pin-text">
         {props.text}
       </div>
@@ -57,7 +80,11 @@ type TourcardMapProps = {
   filePath: string
 }
 
-class TourCardMap extends React.Component<TourcardMapProps, any> {
+type TourCardMapState = {
+  places: any[]
+}
+
+class TourCardMap extends React.Component<TourcardMapProps, TourCardMapState> {
   constructor(props: TourcardMapProps) {
     super(props);
 
@@ -80,12 +107,30 @@ class TourCardMap extends React.Component<TourcardMapProps, any> {
       .catch(err => console.log(err))
   }
 
+  getPlaceById = (id: number | string, currentState?: TourCardMapState) => {
+    id = typeof id === 'string' ? parseInt(id, 10) : id
+    const actionState = currentState || this.state
+    return actionState.places.find((currentPlace:any) => currentPlace.id === id);
+  }
+
+  closeAllInfoWindows = () => {
+    this.setState((state: TourCardMapState) => {
+      state.places.forEach((place: any) => place.show = false)
+      return { places: state.places };
+    })
+  }
+
   // onChildClick callback can take two arguments: key and childProps
   onChildClickCallback = (key:any, props: any) => {
+    this.closeAllInfoWindows()
     this.setState((state: any) => {
-      console.log(state)
-      const index = state.places.findIndex((e:any) => e.id === parseInt(key, 10));
-      state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
+      console.log('key - ', key)
+      console.log('state - ', state)
+      console.log('props - ', props)
+      const clickedPlace = this.getPlaceById(key, state)
+      clickedPlace.show = !clickedPlace.show
+      //const index = state.places.findIndex((e:any) => e.id === parseInt(key, 10));
+      //state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
       return { places: state.places };
     });
   };
@@ -93,15 +138,21 @@ class TourCardMap extends React.Component<TourcardMapProps, any> {
   handleMapClick = (clickedProps: any) => {
     console.log("---- Click on Map Body Captured ---")
     console.log(clickedProps)
+    this.closeAllInfoWindows()
   }
 
   createMapOptions = (maps: any) => {
     return {
-      panControl: false,
-      mapTypeControl: false,
-      scrollwheel: false,
+      panControl: true,
+      mapTypeControl: true,
+      scrollwheel: true,
       styles: [{ stylers: [{ 'saturation': -100 }, { 'gamma': 0.8 }, { 'lightness': 4 }, { 'visibility': 'on' }] }]
     }
+  }
+
+  handleChange = (changeProps: any) => {
+    console.log("Change noted...")
+    console.log(changeProps)
   }
 
   render() {
@@ -124,6 +175,8 @@ class TourCardMap extends React.Component<TourcardMapProps, any> {
             options={this.createMapOptions}
             onChildClick={this.onChildClickCallback}
             onClick={this.handleMapClick}
+            onChange={this.handleChange}
+            hoverDistance={25}
           >
             {
               places.map((place: any) =>

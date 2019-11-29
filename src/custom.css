@@ -250,7 +250,8 @@
   align-items: center;
   background-color: rgb(255, 255, 255);
   border-radius: 28px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, rgba(0, 0, 0, 0.18) 0px 1px 2px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.18) 0px 1px 2px;
   color: rgb(113, 113, 113);
   display: flex;
   height: 28px;
@@ -258,7 +259,7 @@
   padding: 0px 8px;
   position: relative;
   white-space: nowrap;
-  width: 48px
+  width: 48px;
 }
 
 .map-marker {
@@ -275,12 +276,11 @@
   transform: translate(-50%, -50%);
 }
 
-.map-marker:hover {  
+.map-marker:hover {
   background-color: #000;
   border: 2px solid var(--primary);
   z-index: 1;
 }
-
 
 .pin {
   width: 35px;
@@ -292,15 +292,25 @@
   left: 50%;
   top: 50%;
   margin: -25px 0 0 -23px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, rgba(0, 0, 0, 0.18) 0px 1px 2px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.18) 0px 1px 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: black;
+  cursor: pointer;
 }
 .pin-text {
   transform: rotate(45deg);
   font-weight: 500;
+}
+.pin-over {
+  background-color: #000;
+  color: #fff;
+}
+.pin-pressed {
+  background-color: var(--primary);
+  color: #fff;
 }
 .bounce {
   animation-name: bounce;
@@ -319,6 +329,7 @@
   margin: 11px 0px 0px -12px;
   transform: rotateX(55deg);
   z-index: -2;
+  cursor: pointer;
 }
 .pulse:after {
   content: "";
