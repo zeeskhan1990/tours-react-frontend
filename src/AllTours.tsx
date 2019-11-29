@@ -17,11 +17,11 @@ const classNames = require("classnames")
 
 const AllTours: React.FC = () => {
   //Should be converted to a useReducer
-  const initialFocusedPlace: Place | null = null
+  //const initialFocusedPlace: Place | null = null
   const [modalShow, setModalShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [places, setPlaces] = useState(new Array<Place>());
-  const [focusedPlace, setFocusedPlace] = useState(initialFocusedPlace)
+  const [focusedPlace, setFocusedPlace] = useState<Place | undefined>(undefined)
   /*const mainBlockClassName = classNames({
     tour-map-container: true,
     my-3: true,
@@ -44,7 +44,7 @@ const AllTours: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    console.log("*** Places Only Effect ***")
+    console.log("*** All Updates Effect ***")
   })
 
   //Generic array of objects update by id method
@@ -57,6 +57,9 @@ const AllTours: React.FC = () => {
   }
 
   const updatePlaces = (places: Place[]) => {
+    //setFocusedPlace(myPlaces[0])
+    setFocusedPlace(undefined)
+
     setPlaces([...places])
   }
   return (
