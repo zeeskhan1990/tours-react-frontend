@@ -43,6 +43,10 @@ const AllTours: React.FC = () => {
       .catch(err => console.log(err))
   }, [])
 
+  useEffect(() => {
+    console.log("*** Places Only Effect ***")
+  })
+
   //Generic array of objects update by id method
   const updateCollectionById = <T, K extends keyof T>(id: React.ReactText, collection: T[], collectionKey: K, collectionValue: T[K]) => {
     id = typeof id === 'string' ? parseInt(id, 10) : id
@@ -53,8 +57,7 @@ const AllTours: React.FC = () => {
   }
 
   const updatePlaces = (places: Place[]) => {
-    //more - ops
-    setPlaces(places)
+    setPlaces([...places])
   }
   return (
     <React.Fragment>

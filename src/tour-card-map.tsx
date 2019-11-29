@@ -84,6 +84,12 @@ class TourCardMap extends React.Component<TourcardMapProps> {
       .catch(err => console.log(err));*/
   }
 
+  componentDidUpdate(prevProps: TourcardMapProps, prevState: any) {
+    console.log("!!! Map Component Has been Updated !!!")
+    console.log(this.props)
+    console.log(prevProps)
+  }
+
   getPlaceById = (id: number | string) => {
     id = typeof id === "string" ? parseInt(id, 10) : id;
     const {places} = this.props
@@ -93,23 +99,26 @@ class TourCardMap extends React.Component<TourcardMapProps> {
   };
 
   closeAllInfoWindows = () => {    
-    const {places} = this.props
+    const allProps = {...this.props}
+    const {places} = allProps
     places.forEach((place: Place) => (place.show = false));
     this.props.updatePlaces(places)
+    console.log("InVOKED Update Places from Close Window!")
   };
 
   // onChildClick callback can take two arguments: key and childProps
   onChildClickCallback = (key: any, clickedMarkerProps: any) => {
     console.log("key - ", key);
     console.log("props - ", clickedMarkerProps);
-
-    this.closeAllInfoWindows();    
-    const {places} = this.props
+    this.closeAllInfoWindows();
+    console.log("InVOKED Close All Infos")    
+    const allProps = {...this.props}
+    const {places} = allProps
     key = typeof key === "string" ? parseInt(key, 10) : key;
     let activePlace = places.find(
-      (currentPlace: any) => currentPlace.key === key
+      (currentPlace: any) => currentPlace.id === key
     );
-
+    console.log("Active place", activePlace)
     if(typeof activePlace !== 'undefined') {
       activePlace.show = !activePlace.show;
       this.props.updatePlaces(places)
@@ -159,7 +168,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
 
   render() {
     const { places } = this.props;
-    console.log("Places now");
+    console.log(" In Map Render - Places Now");
     console.log(places);
     return (
       <React.Fragment>
