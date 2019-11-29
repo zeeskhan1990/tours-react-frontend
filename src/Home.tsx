@@ -1,7 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Carousel } from "react-bootstrap";
 
-import Carousel from "react-bootstrap/Carousel";
+//import Carousel from "react-bootstrap/Carousel";
 
 const Home: React.FC = () => {
   return (
