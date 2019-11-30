@@ -7,6 +7,7 @@ const classNames = require("classnames");
 
 type InfoWindowProps = {
   place: Place;
+  mapInstance: any
 };
 
 const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
@@ -17,19 +18,26 @@ const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
     //console.log("Click on Info Captured", ev)
   };
   return (
-    <Card border="primary" style={{ width: "16rem", zIndex:1 }}>
+    <Card border="primary" style={{ width: "274px", zIndex:1 }}>
     <Card.Img
       variant="top"
-      src="https://source.unsplash.com/phIFdC6lA4E/1504x1000"
-      style={{ height: "10rem" }}
+      src={place.image.small}
+      style={{ height: "184px" }}
     />
     <Card.Body>
-      <Card.Title>Card Title</Card.Title>
+      <Card.Title className="d-flex justify-content-between"><span>{place.name}</span><span>{place.price}</span></Card.Title>
+      <Card.Subtitle>{place.title}</Card.Subtitle>
+      <div className="mt-2 d-flex justify-content-between">
+          <div className="tour-pointer">
+            <i className="fas fa-map-marker-alt tour-icons" /><span> {place.starting_point}</span>
+          </div>
+          <div className="tour-pointer">
+            <i className="fas fa-calendar tour-icons" /><span> {place.next_date}</span>
+          </div>
+        </div>
       <Card.Text>
-        Some quick example text to build on the card title and make up the
-        bulk of the card's content.
+        
       </Card.Text>
-      <Button variant="primary">Go somewhere</Button>
     </Card.Body>
     {/*<div className="info-window-style" onClick={handleClick}>
     <div style={{ fontSize: 16 }}>
@@ -58,6 +66,7 @@ type MapMarkerProps = {
   place: Place;
   $hover?: boolean;
   focused: boolean;
+  mapInstance: any
 };
 
 const MapMarker: React.FC<MapMarkerProps> = (props: MapMarkerProps) => {
@@ -73,17 +82,28 @@ const MapMarker: React.FC<MapMarkerProps> = (props: MapMarkerProps) => {
         <div className="pin-text">{props.text}</div>
       </div>
       <div className="pulse" />
-      {props.show && <InfoWindow place={props.place} />}
+      {props.show && <InfoWindow place={props.place} mapInstance={props.mapInstance}/>}
     </React.Fragment>
   );
 };
 
-type TourcardMapProps = {
+type TourCardMapProps = {
   places: Place[];
   updatePlaces: (places: Place[]) => void;
 };
 
-class TourCardMap extends React.Component<TourcardMapProps> {
+type TourCardMapState = {
+  mapInstance: any
+}
+
+class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {  
+
+  constructor(props: TourCardMapProps) {
+    super(props)
+    this.state = {
+      mapInstance: null
+    }
+  }
   componentDidMount() {
     console.log("Map Mounting start");
     /*fetch(this.props.filePath)
@@ -129,6 +149,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
       activePlace.map.show_info = !activePlace.map.show_info;
       this.props.updatePlaces(places);
     }
+    //this.state
     /*this.setState((state: any) => {
       console.log("key - ", key);
       console.log("state - ", state);
@@ -146,6 +167,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
     console.log("---- Click on Map Body Captured ---");
     console.log(clickedProps);
     this.closeAllInfoWindows();
+    this.state.mapInstance.panTo({lat: clickedProps.lat, lng: clickedProps.lng})
   };
 
   createMapOptions = (maps: any) => {
@@ -153,6 +175,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
       panControl: true,
       mapTypeControl: true,
       scrollwheel: true,
+      zoomControl: false,
       styles: [
         {
           stylers: [
@@ -171,10 +194,16 @@ class TourCardMap extends React.Component<TourcardMapProps> {
     console.log(changeProps);
   };
 
-  /*isFocused = (id: number) => {
-    const {focusedPlace} = this.props
-    return focusedPlace && focusedPlace.id === id ? true : false
-  }*/
+  handleGoogleApiLoad = (map:any, maps:any, places: Place[]) => {
+    console.log("Google API LOADED...");
+    this.setState({mapInstance: map})
+    debugger
+    console.log(map)
+    console.log(map.getDiv().offsetWidth)
+    console.log(map.getDiv().offsetHeight)
+    console.log(map.getBounds())
+    onApiLoad(map, maps, places);
+  }
 
   render() {
     const { places } = this.props;
@@ -193,11 +222,12 @@ class TourCardMap extends React.Component<TourcardMapProps> {
               key: "AIzaSyBZib4Lvp0g1L8eskVBFJ0SEbnENB6cJ-g" //Env variables
             }}
             yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => onApiLoad(map, maps, places)}
+            onGoogleApiLoaded={({ map, maps }) => this.handleGoogleApiLoad(map, maps, places)}
             options={this.createMapOptions}
             onChildClick={this.onChildClickCallback}
             onClick={this.handleMapClick}
             onChange={this.handleChange}
+            margin={[]}
             hoverDistance={25}
           >
             {places.map((place: Place) => (
@@ -209,6 +239,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
                 place={place}
                 text={place.price}
                 focused={place.map.focused}
+                mapInstance={this.state.mapInstance}
               />
             ))}
           </GoogleMapReact>
