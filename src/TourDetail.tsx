@@ -10,7 +10,7 @@ const TourDetail: React.FC = () => {
      <Jumbotron className="test-jumbo d-flex justify-content-end align-items-center flex-column">
         <Row>
           <div className="jumbo-image-overlay">
-            <span className="jumbo-title-text">The Mountain Hiker</span>
+            <span className="jumbo-title-text">The Culture Explorer</span>
           </div>
         </Row>
         <Row className="text-white mt-2 p-1 bg-gradient-dark">

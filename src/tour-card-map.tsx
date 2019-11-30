@@ -17,14 +17,35 @@ const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
     //console.log("Click on Info Captured", ev)
   };
   return (
-    <div className="info-window-style" onClick={handleClick}>
-      <div style={{ fontSize: 16 }}>{place.name}</div>
-      <div style={{ fontSize: 14 }}>
-        {place.review_score}({place.no_of_reviews})
-      </div>
-      <div style={{ fontSize: 14, color: "grey" }}>{place.description}</div>
-      <div style={{ fontSize: 14, color: "grey" }}>{`$` + place.price}</div>
+    <Card border="primary" style={{ width: "16rem", zIndex:1 }}>
+    <Card.Img
+      variant="top"
+      src="https://source.unsplash.com/phIFdC6lA4E/1504x1000"
+      style={{ height: "10rem" }}
+    />
+    <Card.Body>
+      <Card.Title>Card Title</Card.Title>
+      <Card.Text>
+        Some quick example text to build on the card title and make up the
+        bulk of the card's content.
+      </Card.Text>
+      <Button variant="primary">Go somewhere</Button>
+    </Card.Body>
+    {/*<div className="info-window-style" onClick={handleClick}>
+    <div style={{ fontSize: 16 }}>
+      {place.name}
     </div>
+    <div style={{ fontSize: 14 }}>
+    {place.review_score}({place.no_of_reviews})
+    </div>
+    <div style={{ fontSize: 14, color: 'grey' }}>
+      {place.description}
+    </div>
+    <div style={{ fontSize: 14, color: 'grey' }}>
+      {`$` + place.price}
+    </div>
+  </div>*/}
+  </Card>
   );
 };
 
@@ -59,7 +80,6 @@ const MapMarker: React.FC<MapMarkerProps> = (props: MapMarkerProps) => {
 
 type TourcardMapProps = {
   places: Place[];
-  focusedPlace: Place | undefined;
   updatePlaces: (places: Place[]) => void;
 };
 
@@ -87,7 +107,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
   closeAllInfoWindows = () => {
     const allProps = { ...this.props };
     const { places } = allProps;
-    places.forEach((place: Place) => (place.show = false));
+    places.forEach((place: Place) => (place.map.show_info = false));
     this.props.updatePlaces(places);
     console.log("InVOKED Update Places from Close Window!");
   };
@@ -106,7 +126,7 @@ class TourCardMap extends React.Component<TourcardMapProps> {
     );
     console.log("Active place", activePlace);
     if (typeof activePlace !== "undefined") {
-      activePlace.show = !activePlace.show;
+      activePlace.map.show_info = !activePlace.map.show_info;
       this.props.updatePlaces(places);
     }
     /*this.setState((state: any) => {
@@ -151,13 +171,13 @@ class TourCardMap extends React.Component<TourcardMapProps> {
     console.log(changeProps);
   };
 
-  isFocused = (id: number) => {
+  /*isFocused = (id: number) => {
     const {focusedPlace} = this.props
     return focusedPlace && focusedPlace.id === id ? true : false
-  }
+  }*/
 
   render() {
-    const { places, focusedPlace } = this.props;
+    const { places } = this.props;
     console.log(" In Map Render - Places Now");
     console.log(places);
     return (
@@ -180,15 +200,15 @@ class TourCardMap extends React.Component<TourcardMapProps> {
             onChange={this.handleChange}
             hoverDistance={25}
           >
-            {places.map((place: any) => (
+            {places.map((place: Place) => (
               <MapMarker
                 key={place.id}
                 lat={place.geometry.location.lat}
                 lng={place.geometry.location.lng}
-                show={place.show}
+                show={place.map.show_info}
                 place={place}
                 text={place.price}
-                focused={this.isFocused(place.id)}
+                focused={place.map.focused}
               />
             ))}
           </GoogleMapReact>

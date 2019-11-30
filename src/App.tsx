@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
@@ -8,7 +8,7 @@ import AllTours from "./AllTours"
 import TourDetail from "./TourDetail"
 import Signin from "./Signin";
 import { LinkContainer } from "react-router-bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 import { NavDropdown } from "react-bootstrap";
 
 
@@ -31,6 +31,17 @@ const NoMatch:React.FC = () => {
 }
 const App: React.FC = () => {
   const [isSideBarOpen, setSideBarState] = useState(false);
+  const history = useHistory()
+  useEffect(() => {
+    console.log("App Mounted !!") 
+    let deregisterListener = history.listen((location, action) => {
+      console.log("on route change");
+      setSideBarState(false)
+    });
+    return () => {
+      deregisterListener()
+    }
+  }, [])
   return (
     <React.Fragment>
       <Navbar
@@ -63,12 +74,6 @@ const App: React.FC = () => {
               </LinkContainer>
               <LinkContainer to="/tour-detail/100">
                 <NavDropdown.Item >Tour Detail</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/account/settings">
-                <NavDropdown.Item >Settings</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/account/bookings">
-                <NavDropdown.Item >Bookings</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
           </Nav>
@@ -103,16 +108,6 @@ const App: React.FC = () => {
           <Nav.Item>
             <LinkContainer to="/tour-detail/100">
             <Nav.Link>Tour Detail</Nav.Link>
-            </LinkContainer>
-          </Nav.Item>
-          <Nav.Item>
-            <LinkContainer to="/account/settings">
-            <Nav.Link>Settings</Nav.Link>
-            </LinkContainer>
-          </Nav.Item>
-          <Nav.Item>
-            <LinkContainer to="/account/bookings">
-            <Nav.Link>Bookings</Nav.Link>
             </LinkContainer>
           </Nav.Item>
         </Nav>

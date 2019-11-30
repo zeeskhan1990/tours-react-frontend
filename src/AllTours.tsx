@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import TourFilter from "./tour-filter";
 import TourModal from "./tour-modal"
-import TourCardDeck from "./tour-card-deck"
+import TourCardList from "./tour-card-list"
 import TourCardMap from "./tour-card-map"
 import Place from "./Place"
 const classNames = require("classnames")
@@ -21,7 +21,7 @@ const AllTours: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [places, setPlaces] = useState(new Array<Place>());
-  const [focusedPlace, setFocusedPlace] = useState<Place | undefined>(undefined)
+  //const [focusedPlace, setFocusedPlace] = useState<Place | undefined>(undefined)
   /*const mainBlockClassName = classNames({
     tour-map-container: true,
     my-3: true,
@@ -33,8 +33,13 @@ const AllTours: React.FC = () => {
     fetch('places.json')
       .then(response => response.json())
       .then(data => {
-        data.results.forEach((result:any) => {
-          result.show = false; // eslint-disable-line no-param-reassign
+        data.results.forEach((result:Place) => {
+          const initMap = {
+            show_info: false,
+            focused: false
+          }
+          result.map = initMap
+          //result.show = false; // eslint-disable-line no-param-reassign
         });
         setPlaces(data.results)
         //this.setState({ places: data.results });
@@ -57,9 +62,6 @@ const AllTours: React.FC = () => {
   }
 
   const updatePlaces = (places: Place[]) => {
-    //setFocusedPlace(myPlaces[0])
-    setFocusedPlace(undefined)
-
     setPlaces([...places])
   }
   return (
@@ -87,9 +89,8 @@ const AllTours: React.FC = () => {
           </Col>
           <Col className="tour-map-container my-3 ml-lg-3">
             {showMap ? 
-            <TourCardMap places={places} focusedPlace={focusedPlace} 
-            updatePlaces={updatePlaces} /> :
-            <TourCardDeck/>}
+            <TourCardMap places={places} updatePlaces={updatePlaces} /> :
+            <TourCardList places={places}/>}
           </Col>
         </Row>
       </Container>

@@ -20,5 +20,8 @@ export default interface Place {
       lng: number
     }
   },
-  show: boolean
+  map: {
+    show_info: boolean,
+    focused: boolean
+  }  
 }

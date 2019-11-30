@@ -9,14 +9,14 @@
           "price": "$697",
           "title": "Difficult 7-day tour",
           "description": "Hike up the untouched trails",
-          "next_date": "August, 2021",
-          "starting point": "Sikkim, India",
+          "next_date": "08/08/21",
+          "starting_point": "Sikkim, IN",
           "max_participants": 12,
           "stops": 4,
      
           "image": {
              "main": "https://source.unsplash.com/phIFdC6lA4E",
-             "small": "https://source.unsplash.com/phIFdC6lA4E/1024x1024"
+             "small": "https://source.unsplash.com/phIFdC6lA4E/1504x1000"
           },
           "geometry": {
               "location": {
@@ -27,20 +27,20 @@
       },
       {
           "id": 2,
-          "name": "The Culture Lover",
+          "name": "The Culture Explorer",
           "review_score": 4.2,
           "no_of_reviews": 9,
           "price": "$697",
           "title": "Moderate 5-day tour",
           "description": "Immerse yourself in a new culture",
-          "next_date": "June, 2021",
-          "starting point": "Kyoto, Japan",
+          "next_date": "15/06/21",
+          "starting_point": "Kyoto, JP",
           "max_participants": 12,
           "stops": 3,
      
           "image": {
              "main": "https://source.unsplash.com/_UIN-pFfJ7c",
-             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1024x1024"
+             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1504x1000"
           },
           "geometry": {
               "location": {
@@ -51,20 +51,20 @@
       },
       {
           "id": 3,
-          "name": "The Sea Explorer",
+          "name": "The Tropical Surfer ",
           "review_score": 4.2,
           "no_of_reviews": 9,
           "price": "$697",
           "title": "Moderate 5-day tour",
           "description": "Enjoy the sand and the pristine beaches",
-          "next_date": "June, 2021",
-          "starting point": "Koh Tao, Thailand",
+          "next_date": "06/07/21",
+          "starting_point": "Koh Tao, TH",
           "max_participants": 12,
           "stops": 3,
      
           "image": {
              "main": "https://source.unsplash.com/1VYdx37vOGQ",
-             "small": "https://source.unsplash.com/1VYdx37vOGQ/1024x1024"
+             "small": "https://source.unsplash.com/1VYdx37vOGQ/1504x1000"
           },
           "geometry": {
               "location": {
@@ -78,17 +78,17 @@
           "name": "The Mountain Hiker",
           "review_score": 4.8,
           "no_of_reviews": 8,
-          "price": "$697",
+          "price": "$617",
           "title": "Difficult 7-day tour",
           "description": "Hike up the untouched trails",
-          "next_date": "August, 2021",
-          "starting point": "Himachal, India",
+          "next_date": "07/08/21",
+          "starting_point": "Himachal, IN",
           "max_participants": 12,
           "stops": 4,
      
           "image": {
              "main": "https://source.unsplash.com/phIFdC6lA4E",
-             "small": "https://source.unsplash.com/phIFdC6lA4E/1024x1024"
+             "small": "https://source.unsplash.com/phIFdC6lA4E/1504x1000"
           },
           "geometry": {
               "location": {
@@ -99,20 +99,20 @@
       },
       {
           "id": 5,
-          "name": "The Culture Lover",
+          "name": "The Culture Explorer",
           "review_score": 4.2,
           "no_of_reviews": 9,
-          "price": "$697",
+          "price": "$497",
           "title": "Moderate 5-day tour",
           "description": "Immerse yourself in a new culture",
-          "next_date": "June, 2021",
-          "starting point": "Bangkok, Thailand",
+          "next_date": "07/07/21",
+          "starting_point": "Bangkok, TH",
           "max_participants": 12,
           "stops": 3,
      
           "image": {
              "main": "https://source.unsplash.com/_UIN-pFfJ7c",
-             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1024x1024"
+             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1504x1000"
           },
           "geometry": {
               "location": {
@@ -123,20 +123,20 @@
       },
       {
           "id": 6,
-          "name": "The Sea Explorer",
+          "name": "The Tropical Surfer ",
           "review_score": 4.2,
           "no_of_reviews": 9,
-          "price": "$697",
+          "price": "$587",
           "title": "Moderate 5-day tour",
           "description": "Enjoy the sand and the pristine beaches",
-          "next_date": "June, 2021",
-          "starting point": "Okinawa, Japan",
+          "next_date": "12/10/21",
+          "starting_point": "Okinawa, JP",
           "max_participants": 16,
           "stops": 3,
      
           "image": {
              "main": "https://source.unsplash.com/1VYdx37vOGQ",
-             "small": "https://source.unsplash.com/1VYdx37vOGQ/1024x1024"
+             "small": "https://source.unsplash.com/1VYdx37vOGQ/1504x1000"
           },
           "geometry": {
               "location": {
@@ -150,17 +150,17 @@
           "name": "The Mountain Hiker",
           "review_score": 4.8,
           "no_of_reviews": 8,
-          "price": "$697",
+          "price": "$500",
           "title": "Difficult 7-day tour",
           "description": "Hike up the untouched trails",
-          "next_date": "August, 2021",
-          "starting point": "Pokhra, Nepal",
+          "next_date": "06/06/21",
+          "starting_point": "Pokhra, NP",
           "max_participants": 10,
           "stops": 4,
      
           "image": {
              "main": "https://source.unsplash.com/phIFdC6lA4E",
-             "small": "https://source.unsplash.com/phIFdC6lA4E/1024x1024"
+             "small": "https://source.unsplash.com/phIFdC6lA4E/1504x1000"
           },
           "geometry": {
               "location": {
@@ -171,20 +171,20 @@
       },
       {
           "id": 8,
-          "name": "The Culture Lover",
+          "name": "The Culture Explorer",
           "review_score": 4.2,
           "no_of_reviews": 9,
-          "price": "$697",
+          "price": "$758",
           "title": "Moderate 5-day tour",
           "description": "Immerse yourself in a new culture",
-          "next_date": "June, 2021",
-          "starting point": "Yangon, Myanmar",
+          "next_date": "07/09/21",
+          "starting_point": "Yangon, MM",
           "max_participants": 12,
           "stops": 3,
      
           "image": {
              "main": "https://source.unsplash.com/_UIN-pFfJ7c",
-             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1024x1024"
+             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1504x1000"
           },
           "geometry": {
               "location": {
@@ -195,20 +195,20 @@
       },
       {
           "id": 9,
-          "name": "The Sea Explorer",
+          "name": "The Tropical Surfer ",
           "review_score": 4.2,
           "no_of_reviews": 9,
-          "price": "$697",
+          "price": "$666",
           "title": "Moderate 5-day tour",
           "description": "Enjoy the sand and the pristine beaches",
-          "next_date": "June, 2021",
-          "starting point": "Andaman, India",
+          "next_date": "18/08/21",
+          "starting_point": "Andaman, IN",
           "max_participants": 15,
           "stops": 3,
      
           "image": {
              "main": "https://source.unsplash.com/1VYdx37vOGQ",
-             "small": "https://source.unsplash.com/1VYdx37vOGQ/1024x1024"
+             "small": "https://source.unsplash.com/1VYdx37vOGQ/1504x1000"
           },
           "geometry": {
               "location": {
