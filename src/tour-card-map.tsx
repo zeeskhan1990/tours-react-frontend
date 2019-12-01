@@ -5,9 +5,11 @@ import { onApiLoad, isFilled } from "./map-utils";
 import Place from "./Place";
 const classNames = require("classnames");
 
+declare const google;
+
 type InfoWindowProps = {
   place: Place;
-  mapInstance: any
+  mapInstance: any;
 };
 
 const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
@@ -18,42 +20,31 @@ const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
     //console.log("Click on Info Captured", ev)
   };
   return (
-    <Card border="primary" style={{ width: "274px", zIndex:1 }}>
-    <Card.Img
-      variant="top"
-      src={place.image.small}
-      style={{ height: "184px" }}
-    />
-    <Card.Body>
-      <Card.Title className="d-flex justify-content-between"><span>{place.name}</span><span>{place.price}</span></Card.Title>
-      <Card.Subtitle>{place.title}</Card.Subtitle>
-      <div className="mt-2 d-flex justify-content-between">
+    <Card border="primary" style={{ width: "274px", zIndex: 1 }}>
+      <Card.Img
+        variant="top"
+        src={place.image.small}
+        style={{ height: "184px" }}
+      />
+      <Card.Body>
+        <Card.Title className="d-flex justify-content-between">
+          <span>{place.name}</span>
+          <span>{place.price}</span>
+        </Card.Title>
+        <Card.Subtitle>{place.title}</Card.Subtitle>
+        <div className="mt-2 d-flex justify-content-between">
           <div className="tour-pointer">
-            <i className="fas fa-map-marker-alt tour-icons" /><span> {place.starting_point}</span>
+            <i className="fas fa-map-marker-alt tour-icons" />
+            <span> {place.starting_point}</span>
           </div>
           <div className="tour-pointer">
-            <i className="fas fa-calendar tour-icons" /><span> {place.next_date}</span>
+            <i className="fas fa-calendar tour-icons" />
+            <span> {place.next_date}</span>
           </div>
         </div>
-      <Card.Text>
-        
-      </Card.Text>
-    </Card.Body>
-    {/*<div className="info-window-style" onClick={handleClick}>
-    <div style={{ fontSize: 16 }}>
-      {place.name}
-    </div>
-    <div style={{ fontSize: 14 }}>
-    {place.review_score}({place.no_of_reviews})
-    </div>
-    <div style={{ fontSize: 14, color: 'grey' }}>
-      {place.description}
-    </div>
-    <div style={{ fontSize: 14, color: 'grey' }}>
-      {`$` + place.price}
-    </div>
-  </div>*/}
-  </Card>
+        <Card.Text />
+      </Card.Body>
+    </Card>
   );
 };
 
@@ -66,7 +57,7 @@ type MapMarkerProps = {
   place: Place;
   $hover?: boolean;
   focused: boolean;
-  mapInstance: any
+  mapInstance: any;
 };
 
 const MapMarker: React.FC<MapMarkerProps> = (props: MapMarkerProps) => {
@@ -82,7 +73,9 @@ const MapMarker: React.FC<MapMarkerProps> = (props: MapMarkerProps) => {
         <div className="pin-text">{props.text}</div>
       </div>
       <div className="pulse" />
-      {props.show && <InfoWindow place={props.place} mapInstance={props.mapInstance}/>}
+      {props.show && (
+        <InfoWindow place={props.place} mapInstance={props.mapInstance} />
+      )}
     </React.Fragment>
   );
 };
@@ -93,29 +86,20 @@ type TourCardMapProps = {
 };
 
 type TourCardMapState = {
-  mapInstance: any
-}
+  mapInstance: any;
+  mapParams: any;
+};
 
-class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {  
-
+class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
   constructor(props: TourCardMapProps) {
-    super(props)
+    super(props);
     this.state = {
-      mapInstance: null
-    }
+      mapInstance: null,
+      mapParams: null
+    };
   }
   componentDidMount() {
     console.log("Map Mounting start");
-    /*fetch(this.props.filePath)
-      .then(response => response.json())
-      .then(data => {
-        data.results.forEach((result: any) => {
-          result.show = false; // eslint-disable-line no-param-reassign
-        });
-        this.setState({ places: data.results });
-        console.log("Mounting end");
-      })
-      .catch(err => console.log(err));*/
   }
 
   getPlaceById = (id: number | string) => {
@@ -130,6 +114,80 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     places.forEach((place: Place) => (place.map.show_info = false));
     this.props.updatePlaces(places);
     console.log("InVOKED Update Places from Close Window!");
+  };
+
+  repositionMap = (clickedMarkerProps: any) => {
+    const infoWindowWidth = 274;
+    const infoWindowHeight = 306;
+    const currentCenter = this.state.mapParams.center;
+
+    const currentLatLng = new google.maps.LatLng(
+      clickedMarkerProps.lat,
+      clickedMarkerProps.lng
+    );
+    const centerLatLng = new google.maps.LatLng(
+      currentCenter.lat,
+      currentCenter.lng
+    );
+    const neLatLang = new google.maps.LatLng(
+      this.state.mapParams.bounds.ne.lat,
+      this.state.mapParams.bounds.ne.lng
+    );
+    const swLatLang = new google.maps.LatLng(
+      this.state.mapParams.bounds.sw.lat,
+      this.state.mapParams.bounds.sw.lng
+    );
+
+    const overlay = new google.maps.OverlayView();
+    overlay.draw = function() {};
+    overlay.setMap(this.state.mapInstance);
+    debugger;
+    const clickedMarkerPoint = overlay
+      .getProjection()
+      .fromLatLngToContainerPixel(currentLatLng);
+    const centerPoint = overlay
+      .getProjection()
+      .fromLatLngToContainerPixel(centerLatLng);
+    const nePoint = overlay
+      .getProjection()
+      .fromLatLngToContainerPixel(neLatLang);
+    const swPoint = overlay
+      .getProjection()
+      .fromLatLngToContainerPixel(swLatLang);
+    console.log(
+      "--- All points ---",
+      clickedMarkerPoint,
+      centerPoint,
+      nePoint,
+      swPoint
+    );
+
+    const xPos = infoWindowWidth + clickedMarkerPoint.x;
+    const yPos = infoWindowHeight + clickedMarkerPoint.y;
+    let isInfoOut = false,
+      newCenterX = centerPoint.x,
+      newCenterY = centerPoint.y;
+
+    if (xPos > nePoint.x) {
+      isInfoOut = true;
+      const shiftX = xPos - nePoint.x;
+      newCenterX = newCenterX + shiftX + 10//buffer;
+    }
+    if (yPos > swPoint.y) {
+      isInfoOut = true;
+      const shiftY = yPos - swPoint.y;
+      newCenterY = newCenterY + shiftY + 10//buffer;
+    }
+    debugger;
+    if (isInfoOut) {
+      const newCenterLatLng = overlay
+        .getProjection()
+        .fromContainerPixelToLatLng({ x: newCenterX, y: newCenterY });
+      this.state.mapInstance.panTo({
+        lat: newCenterLatLng.lat(),
+        lng: newCenterLatLng.lng()
+      });
+    }
   };
 
   // onChildClick callback can take two arguments: key and childProps
@@ -149,25 +207,14 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
       activePlace.map.show_info = !activePlace.map.show_info;
       this.props.updatePlaces(places);
     }
-    //this.state
-    /*this.setState((state: any) => {
-      console.log("key - ", key);
-      console.log("state - ", state);
-      console.log("props - ", clickedMarkerProps);
-      const clickedPlace = this.getPlaceById(key);
-      if(typeof clickedPlace !== 'undefined') {
-        clickedPlace.show = !clickedPlace.show;
-      }      
-      //const index = state.places.findIndex((e:any) => e.id === parseInt(key, 10));
-      //state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
-      return { places: state.places };*/
+    this.repositionMap(clickedMarkerProps);
   };
 
   handleMapClick = (clickedProps: any) => {
     console.log("---- Click on Map Body Captured ---");
     console.log(clickedProps);
     this.closeAllInfoWindows();
-    this.state.mapInstance.panTo({lat: clickedProps.lat, lng: clickedProps.lng})
+    //this.state.mapInstance.panTo({lat: clickedProps.lat, lng: clickedProps.lng})
   };
 
   createMapOptions = (maps: any) => {
@@ -192,18 +239,19 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
   handleChange = (changeProps: any) => {
     console.log("Change noted...");
     console.log(changeProps);
+    this.setState({ mapParams: changeProps });
   };
 
-  handleGoogleApiLoad = (map:any, maps:any, places: Place[]) => {
+  handleGoogleApiLoad = (map: any, maps: any, places: Place[]) => {
     console.log("Google API LOADED...");
-    this.setState({mapInstance: map})
-    debugger
-    console.log(map)
-    console.log(map.getDiv().offsetWidth)
-    console.log(map.getDiv().offsetHeight)
-    console.log(map.getBounds())
+    this.setState({ mapInstance: map });
+    //debugger
+    console.log(map);
+    console.log(map.getDiv().offsetWidth);
+    console.log(map.getDiv().offsetHeight);
+    console.log(map.getBounds());
     onApiLoad(map, maps, places);
-  }
+  };
 
   render() {
     const { places } = this.props;
@@ -222,7 +270,9 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
               key: "AIzaSyBZib4Lvp0g1L8eskVBFJ0SEbnENB6cJ-g" //Env variables
             }}
             yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => this.handleGoogleApiLoad(map, maps, places)}
+            onGoogleApiLoaded={({ map, maps }) =>
+              this.handleGoogleApiLoad(map, maps, places)
+            }
             options={this.createMapOptions}
             onChildClick={this.onChildClickCallback}
             onClick={this.handleMapClick}
