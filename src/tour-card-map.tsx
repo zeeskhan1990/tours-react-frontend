@@ -32,7 +32,7 @@ const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
           <span>{place.price}</span>
         </Card.Title>
         <Card.Subtitle>{place.title}</Card.Subtitle>
-        <div className="mt-2 d-flex justify-content-between">
+        <div className="mt-3 d-flex justify-content-between">
           <div className="tour-pointer">
             <i className="fas fa-map-marker-alt tour-icons" />
             <span> {place.starting_point}</span>
@@ -40,6 +40,10 @@ const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
           <div className="tour-pointer">
             <i className="fas fa-calendar tour-icons" />
             <span> {place.next_date}</span>
+          </div>
+          <div className="tour-pointer">
+            <i className="fas fa-star tour-icons" />
+            <span> {place.review_score}</span>
           </div>
         </div>
         <Card.Text />
@@ -171,12 +175,12 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     if (xPos > nePoint.x) {
       isInfoOut = true;
       const shiftX = xPos - nePoint.x;
-      newCenterX = newCenterX + shiftX + 10//buffer;
+      newCenterX = newCenterX + shiftX + 10; //buffer;
     }
     if (yPos > swPoint.y) {
       isInfoOut = true;
       const shiftY = yPos - swPoint.y;
-      newCenterY = newCenterY + shiftY + 10//buffer;
+      newCenterY = newCenterY + shiftY + 10; //buffer;
     }
     debugger;
     if (isInfoOut) {

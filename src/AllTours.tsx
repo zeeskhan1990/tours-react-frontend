@@ -10,6 +10,7 @@ import TourFilter from "./tour-filter";
 import TourModal from "./tour-modal"
 import TourCardList from "./tour-card-list"
 import TourCardMap from "./tour-card-map"
+import TourPanel from "./tour-panel"
 import Place from "./Place"
 const classNames = require("classnames")
 
@@ -21,12 +22,6 @@ const AllTours: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [places, setPlaces] = useState(new Array<Place>());
-  //const [focusedPlace, setFocusedPlace] = useState<Place | undefined>(undefined)
-  /*const mainBlockClassName = classNames({
-    tour-map-container: true,
-    my-3: true,
-     ml-3
-  })*/
   //Runs only on mount & unmount once because empty dependency array as argument
   useEffect(() => {
     console.log("---Effect start---")
@@ -84,8 +79,8 @@ const AllTours: React.FC = () => {
         </div>
         <Dropdown.Divider />
         <Row noGutters>
-          <Col xs={showMap ? 4 : 2} className="my-3 d-none d-lg-block">
-            <TourFilter/>
+          <Col xs={showMap ? 6 : 2} className="my-3 d-none d-lg-block">
+            {showMap ? <TourPanel places={places}/> : <TourFilter/>}            
           </Col>
           <Col className="tour-map-container my-3 ml-lg-3">
             {showMap ? 
