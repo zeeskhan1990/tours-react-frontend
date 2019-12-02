@@ -4,8 +4,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Home from "./Home";
 import SideDrawer from "./sidedrawer";
-import AllTours from "./AllTours"
-import TourDetail from "./TourDetail"
+import AllTours from "./all-tours"
+import TourDetail from "./tour-detail"
 import Signin from "./Signin";
 import { LinkContainer } from "react-router-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";

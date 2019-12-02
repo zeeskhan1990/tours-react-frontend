@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, ReactComponentElement, ReactChild } from "react";
 import {
   Container,
   Row,
@@ -17,12 +17,11 @@ const classNames = require("classnames")
 
 
 const AllTours: React.FC = () => {
-  //Should be converted to a useReducer
-  //const initialFocusedPlace: Place | null = null
   const [modalShow, setModalShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [places, setPlaces] = useState(new Array<Place>());
   //Runs only on mount & unmount once because empty dependency array as argument
+  const mapRef = useRef<TourCardMap>(null);
   useEffect(() => {
     console.log("---Effect start---")
     fetch('places.json')
@@ -48,43 +47,57 @@ const AllTours: React.FC = () => {
   })
 
   //Generic array of objects update by id method
-  const updateCollectionById = <T, K extends keyof T>(id: React.ReactText, collection: T[], collectionKey: K, collectionValue: T[K]) => {
+  const findAndUpdateCollectionById = <T, K extends keyof T>(id: React.ReactText, collection: T[], collectionKey: K, collectionValue: T[K]) => {
     id = typeof id === 'string' ? parseInt(id, 10) : id
     const collectionProperty = collection.find((currentPlace:any) => currentPlace.id === id);
     if(typeof collectionProperty !== 'undefined') {
       collectionProperty[collectionKey] = collectionValue
     }
+    return collection
   }
 
   const updatePlaces = (places: Place[]) => {
     setPlaces([...places])
   }
+
+  const updatePlaceMarker = (placeId: Place["id"], placeMap: Place["map"]) => {
+    let newPlaces = [...places]
+    debugger
+    if(newPlaces[placeId].map.show_info !== placeMap.show_info) {
+      if(mapRef && mapRef.current) {
+        mapRef.current.handleActiveMarker(placeId)
+      }      
+    } else {
+      //setPlaces(findAndUpdateCollectionById(placeId, newPlaces, "map", placeMap)) 
+    }
+    //setPlaces(findAndUpdateCollectionById(placeId, newPlaces, "map", placeMap)) 
+  }
   return (
     <React.Fragment>
-      <Container fluid>
-        <div className="d-flex justify-content-between align-content-center">
-          <h3 className="mt-3 mr-2">Explore all tours. </h3>
-          <div className="d-flex flex-col justify-content-center">
-
-            
-          </div>
-          <Form.Check
-            type="switch"
-            id="custom-switch"
-            label="Show Map"
-            className="mt-4 text-nowrap"
-            onChange={() => setShowMap(!showMap)}
-            checked={showMap}
-          />
-        </div>
-        <Dropdown.Divider />
-        <Row noGutters>
-          <Col xs={showMap ? 6 : 2} className="my-3 d-none d-lg-block">
-            {showMap ? <TourPanel places={places}/> : <TourFilter/>}            
+      <Container fluid className="all-tours-title">
+        <Row noGutters className="">
+            <div className="d-flex justify-content-between align-content-between all-tours-title-block">
+              <h3 className="mt-3 mr-2 sticky-top">Explore all tours. </h3>
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                label="Show Map"
+                className="mt-4 text-nowrap sticky-top"
+                onChange={() => setShowMap(!showMap)}
+                checked={showMap}
+              />
+            </div>
+        </Row>
+        <Dropdown.Divider className="m-0"/>
+      </Container>
+      <Container fluid className="all-tours-content">        
+        <Row noGutters className="h-100">
+          <Col xs={showMap ? 6 : 2} className="d-none d-lg-block">
+            {showMap ? <TourPanel places={places} updatePlaceMarker={updatePlaceMarker}/> : <TourFilter/>}            
           </Col>
-          <Col className="tour-map-container my-3 ml-lg-3">
+          <Col className="ml-lg-3">
             {showMap ? 
-            <TourCardMap places={places} updatePlaces={updatePlaces} /> :
+            <TourCardMap ref={mapRef} places={places} updatePlaces={updatePlaces} /> :
             <TourCardList places={places}/>}
           </Col>
         </Row>

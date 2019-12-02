@@ -1,8 +1,8 @@
 .cover {
-  margin-top: -56px;
+  margin-top: 0;
 }
 .custom-carousel-item {
-  height: 100vh;
+  height: calc(100vh - 56px);
   width: 100vw;
   min-height: 350px;
   background-repeat: no-repeat;
@@ -218,7 +218,39 @@
 }
 
 .tour-map-container {
-  height: 74vh;
+  height: calc(100vh - 131px); /*56px navbar + ~75px titlebar*/
+  top: 131px;
+}
+
+.all-tours-title {
+  position: fixed;
+  top: 56px;
+  z-index: 9;
+  background-color: white;
+}
+
+.all-tours-title-block {
+ flex: 1 0 100%;
+}
+
+.all-tours-content {
+  position: relative;
+  top: 74px;
+}
+
+.all-tours-header-row {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  height: 60px;
+  background-color: #fff;
+  top:56px;
+}
+
+.all-tours-header {
+  height: 100%;    
+  width: 100%;
+  margin-right: 30px;
 }
 
 .btn-circle-fab {
@@ -408,7 +440,7 @@ No media query for `xs` since this is the default in Bootstrap*/
     width: 70%;
   }
   .tour-map-container {
-    height: 74vh;
+    
   }
 }
 

@@ -5,7 +5,7 @@ import { onApiLoad, isFilled } from "./map-utils";
 import Place from "./Place";
 const classNames = require("classnames");
 
-declare const google;
+declare const google: any;
 
 type InfoWindowProps = {
   place: Place;
@@ -120,14 +120,14 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     console.log("InVOKED Update Places from Close Window!");
   };
 
-  repositionMap = (clickedMarkerProps: any) => {
+  repositionMap = (activePlace: Place) => {
     const infoWindowWidth = 274;
     const infoWindowHeight = 306;
     const currentCenter = this.state.mapParams.center;
 
     const currentLatLng = new google.maps.LatLng(
-      clickedMarkerProps.lat,
-      clickedMarkerProps.lng
+      activePlace.geometry.location.lat,
+      activePlace.geometry.location.lng
     );
     const centerLatLng = new google.maps.LatLng(
       currentCenter.lat,
@@ -193,25 +193,28 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
       });
     }
   };
+  
+  handleActiveMarker = (placeId:any) => {      
+    const allProps = { ...this.props };
+    const { places } = allProps;
+    placeId = typeof placeId === "string" ? parseInt(placeId, 10) : placeId;
+    let activePlace = places.find(
+      (currentPlace: any) => currentPlace.id === placeId
+    );
+    console.log("Active place", activePlace);
+    if (typeof activePlace !== "undefined") {
+      this.closeAllInfoWindows();
+      activePlace.map.show_info = !activePlace.map.show_info;
+      this.props.updatePlaces(places);
+      this.repositionMap(activePlace);
+    }
+  }
 
   // onChildClick callback can take two arguments: key and childProps
   onChildClickCallback = (key: any, clickedMarkerProps: any) => {
     console.log("key - ", key);
     console.log("props - ", clickedMarkerProps);
-    this.closeAllInfoWindows();
-    console.log("InVOKED Close All Infos");
-    const allProps = { ...this.props };
-    const { places } = allProps;
-    key = typeof key === "string" ? parseInt(key, 10) : key;
-    let activePlace = places.find(
-      (currentPlace: any) => currentPlace.id === key
-    );
-    console.log("Active place", activePlace);
-    if (typeof activePlace !== "undefined") {
-      activePlace.map.show_info = !activePlace.map.show_info;
-      this.props.updatePlaces(places);
-    }
-    this.repositionMap(clickedMarkerProps);
+    this.handleActiveMarker(key)
   };
 
   handleMapClick = (clickedProps: any) => {
@@ -262,7 +265,7 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     console.log(" In Map Render - Places Now");
     console.log(places);
     return (
-      <React.Fragment>
+      <div className="tour-map-container sticky-top">
         {isFilled(places) && (
           <GoogleMapReact
             defaultCenter={{
@@ -298,7 +301,7 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
             ))}
           </GoogleMapReact>
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }
