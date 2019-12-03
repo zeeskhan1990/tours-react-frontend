@@ -2,9 +2,9 @@
   "name": "sample-places",
   "results": [        
       {
-          "id": 1,
+          "id": 101,
           "name": "The Mountain Hiker",
-          "review_score": 4.8,
+          "review_score": 4.3,
           "no_of_reviews": 8,
           "price": "$697",
           "title": "Difficult 7-day tour",
@@ -15,8 +15,8 @@
           "stops": 4,
      
           "image": {
-             "main": "https://source.unsplash.com/phIFdC6lA4E",
-             "small": "https://source.unsplash.com/phIFdC6lA4E/1504x1000"
+             "main": "https://source.unsplash.com/phIFdC6lA4E/2560x1920",
+             "small": "https://source.unsplash.com/phIFdC6lA4E/1536x1180"
           },
           "geometry": {
               "location": {
@@ -26,9 +26,9 @@
           }
       },
       {
-          "id": 2,
+          "id": 202,
           "name": "The Culture Explorer",
-          "review_score": 4.2,
+          "review_score": 4.7,
           "no_of_reviews": 9,
           "price": "$697",
           "title": "Moderate 5-day tour",
@@ -39,8 +39,8 @@
           "stops": 3,
      
           "image": {
-             "main": "https://source.unsplash.com/_UIN-pFfJ7c",
-             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1504x1000"
+             "main": "https://source.unsplash.com/_UIN-pFfJ7c/2560x1920",
+             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1536x1180"
           },
           "geometry": {
               "location": {
@@ -50,9 +50,9 @@
           }
       },
       {
-          "id": 3,
+          "id": 303,
           "name": "The Tropical Surfer ",
-          "review_score": 4.2,
+          "review_score": 3.5,
           "no_of_reviews": 9,
           "price": "$697",
           "title": "Moderate 5-day tour",
@@ -63,8 +63,8 @@
           "stops": 3,
      
           "image": {
-             "main": "https://source.unsplash.com/1VYdx37vOGQ",
-             "small": "https://source.unsplash.com/1VYdx37vOGQ/1504x1000"
+             "main": "https://source.unsplash.com/1VYdx37vOGQ/2560x1920",
+             "small": "https://source.unsplash.com/1VYdx37vOGQ/1536x1180"
           },
           "geometry": {
               "location": {
@@ -74,7 +74,7 @@
           }
       },
       {
-          "id": 4,
+          "id": 404,
           "name": "The Mountain Hiker",
           "review_score": 4.8,
           "no_of_reviews": 8,
@@ -87,8 +87,8 @@
           "stops": 4,
      
           "image": {
-             "main": "https://source.unsplash.com/phIFdC6lA4E",
-             "small": "https://source.unsplash.com/phIFdC6lA4E/1504x1000"
+             "main": "https://source.unsplash.com/Bkci_8qcdvQ/2560x1920",
+             "small": "https://source.unsplash.com/Bkci_8qcdvQ/1536x1180"
           },
           "geometry": {
               "location": {
@@ -98,9 +98,9 @@
           }
       },
       {
-          "id": 5,
+          "id": 505,
           "name": "The Culture Explorer",
-          "review_score": 4.2,
+          "review_score": 4.3,
           "no_of_reviews": 9,
           "price": "$497",
           "title": "Moderate 5-day tour",
@@ -111,8 +111,8 @@
           "stops": 3,
      
           "image": {
-             "main": "https://source.unsplash.com/_UIN-pFfJ7c",
-             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1504x1000"
+             "main": "https://source.unsplash.com/e1NRHsCgFAg/2560x1920",
+             "small": "https://source.unsplash.com/e1NRHsCgFAg/1536x1180"
           },
           "geometry": {
               "location": {
@@ -122,9 +122,9 @@
           }
       },
       {
-          "id": 6,
+          "id": 606,
           "name": "The Tropical Surfer ",
-          "review_score": 4.2,
+          "review_score": 3.5,
           "no_of_reviews": 9,
           "price": "$587",
           "title": "Moderate 5-day tour",
@@ -135,8 +135,8 @@
           "stops": 3,
      
           "image": {
-             "main": "https://source.unsplash.com/1VYdx37vOGQ",
-             "small": "https://source.unsplash.com/1VYdx37vOGQ/1504x1000"
+             "main": "https://source.unsplash.com/m6tAqZvy4RM/2560x1920",
+             "small": "https://source.unsplash.com/m6tAqZvy4RM/1536x1180"
           },
           "geometry": {
               "location": {
@@ -146,7 +146,7 @@
           }
       },
       {
-          "id": 7,
+          "id": 707,
           "name": "The Mountain Hiker",
           "review_score": 4.8,
           "no_of_reviews": 8,
@@ -159,8 +159,8 @@
           "stops": 4,
      
           "image": {
-             "main": "https://source.unsplash.com/phIFdC6lA4E",
-             "small": "https://source.unsplash.com/phIFdC6lA4E/1504x1000"
+             "main": "https://source.unsplash.com/mkdI8JN6sDU/2560x1920",
+             "small": "https://source.unsplash.com/mkdI8JN6sDU/1536x1180"
           },
           "geometry": {
               "location": {
@@ -170,9 +170,9 @@
           }
       },
       {
-          "id": 8,
+          "id": 808,
           "name": "The Culture Explorer",
-          "review_score": 4.2,
+          "review_score": 4.7,
           "no_of_reviews": 9,
           "price": "$758",
           "title": "Moderate 5-day tour",
@@ -183,8 +183,8 @@
           "stops": 3,
      
           "image": {
-             "main": "https://source.unsplash.com/_UIN-pFfJ7c",
-             "small": "https://source.unsplash.com/_UIN-pFfJ7c/1504x1000"
+             "main": "https://source.unsplash.com/pXzvJeuFgd0/2560x1920",
+             "small": "https://source.unsplash.com/pXzvJeuFgd0/1536x1180"
           },
           "geometry": {
               "location": {
@@ -194,9 +194,9 @@
           }
       },
       {
-          "id": 9,
+          "id": 909,
           "name": "The Tropical Surfer ",
-          "review_score": 4.2,
+          "review_score": 4.3,
           "no_of_reviews": 9,
           "price": "$666",
           "title": "Moderate 5-day tour",
@@ -207,8 +207,8 @@
           "stops": 3,
      
           "image": {
-             "main": "https://source.unsplash.com/1VYdx37vOGQ",
-             "small": "https://source.unsplash.com/1VYdx37vOGQ/1504x1000"
+             "main": "https://source.unsplash.com/yZhQkOGJk_o/2560x1920",
+             "small": "https://source.unsplash.com/yZhQkOGJk_o/1536x1180"
           },
           "geometry": {
               "location": {

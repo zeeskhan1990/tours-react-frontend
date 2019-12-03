@@ -12,7 +12,7 @@ import Place from "./Place"
 
 type TourPanelProps = {
     places: Place[]
-    updatePlaceMarker:  (placeId: Place["id"], placeMap: Place["map"]) => void    
+    updatePlaceMarker: (placeId: Place["id"], mapParam: keyof Place["map"], mapValue: boolean) => void    
 }
 
 const TourPanel: React.FC<TourPanelProps> = (props) => {
@@ -20,13 +20,13 @@ const TourPanel: React.FC<TourPanelProps> = (props) => {
   const handleCardAction = (actionType: "mouseEnter" | "mouseLeave" | "click", place: Place ) => {
       switch(actionType) {
         case "mouseEnter" :
-          updatePlaceMarker(place.id, {show_info: place.map.show_info, focused: true} )
+          updatePlaceMarker(place.id, "focused", true)
           break;
         case "mouseLeave" :
-          updatePlaceMarker(place.id, {show_info: place.map.show_info, focused: false} )
+            updatePlaceMarker(place.id, "focused", false)
           break;
         case "click" :
-            updatePlaceMarker(place.id, {show_info: true, focused: place.map.focused} )
+            updatePlaceMarker(place.id, "show_info", true)
             break;
       }
   }

@@ -5,11 +5,12 @@ import {
   Col,
   Dropdown,
   Form,
+  Button,
 } from "react-bootstrap";
 import TourFilter from "./tour-filter";
 import TourModal from "./tour-modal"
-import TourCardList from "./tour-card-list"
-import TourCardMap from "./tour-card-map"
+import TourCardList from "./tour-list-view"
+import TourCardMap from "./tour-map-view"
 import TourPanel from "./tour-panel"
 import Place from "./Place"
 const classNames = require("classnames")
@@ -20,6 +21,7 @@ const AllTours: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [places, setPlaces] = useState(new Array<Place>());
+
   //Runs only on mount & unmount once because empty dependency array as argument
   const mapRef = useRef<TourCardMap>(null);
   useEffect(() => {
@@ -33,10 +35,8 @@ const AllTours: React.FC = () => {
             focused: false
           }
           result.map = initMap
-          //result.show = false; // eslint-disable-line no-param-reassign
         });
         setPlaces(data.results)
-        //this.setState({ places: data.results });
         console.log("Mounting end")
       })
       .catch(err => console.log(err))
@@ -46,10 +46,14 @@ const AllTours: React.FC = () => {
     console.log("*** All Updates Effect ***")
   })
 
+  const findCollectionById = <T, K extends keyof T>(id: React.ReactText, collection: T[]) => {
+    id = typeof id === 'string' ? parseInt(id, 10) : id
+    return collection.find((currentPlace:any) => currentPlace.id === id);
+  }
+
   //Generic array of objects update by id method
   const findAndUpdateCollectionById = <T, K extends keyof T>(id: React.ReactText, collection: T[], collectionKey: K, collectionValue: T[K]) => {
-    id = typeof id === 'string' ? parseInt(id, 10) : id
-    const collectionProperty = collection.find((currentPlace:any) => currentPlace.id === id);
+    const collectionProperty = findCollectionById(id, collection)
     if(typeof collectionProperty !== 'undefined') {
       collectionProperty[collectionKey] = collectionValue
     }
@@ -60,32 +64,48 @@ const AllTours: React.FC = () => {
     setPlaces([...places])
   }
 
-  const updatePlaceMarker = (placeId: Place["id"], placeMap: Place["map"]) => {
+  const updatePlaceMarker = (placeId: Place["id"], mapParam: keyof Place["map"], mapValue: boolean) => {
     let newPlaces = [...places]
-    debugger
-    if(newPlaces[placeId].map.show_info !== placeMap.show_info) {
-      if(mapRef && mapRef.current) {
-        mapRef.current.handleActiveMarker(placeId)
-      }      
-    } else {
-      //setPlaces(findAndUpdateCollectionById(placeId, newPlaces, "map", placeMap)) 
-    }
-    //setPlaces(findAndUpdateCollectionById(placeId, newPlaces, "map", placeMap)) 
+    const currentPlace = findCollectionById(placeId, newPlaces)
+    //debugger
+    console.log("-----********--------")
+    console.log("placeId ", placeId)
+    console.log("mapParam", mapParam)
+    console.log("mapValue", mapValue)
+    if(typeof currentPlace !== 'undefined') {
+      console.log("currentPlaceMap", currentPlace.map)
+      console.log("-----********--------")
+      if(mapParam === "show_info" && currentPlace.map.show_info !== mapValue) {
+        if(mapRef && mapRef.current) {
+          mapRef.current.handleActiveMarker(placeId)
+        }      
+      } else if(mapParam === "focused") {
+        currentPlace.map.focused = mapValue
+        setPlaces(findAndUpdateCollectionById(placeId, newPlaces, "map", currentPlace.map)) 
+      }
+    }    
   }
   return (
     <React.Fragment>
       <Container fluid className="all-tours-title">
         <Row noGutters className="">
-            <div className="d-flex justify-content-between align-content-between all-tours-title-block">
-              <h3 className="mt-3 mr-2 sticky-top">Explore all tours. </h3>
-              <Form.Check
-                type="switch"
-                id="custom-switch"
-                label="Show Map"
-                className="mt-4 text-nowrap sticky-top"
-                onChange={() => setShowMap(!showMap)}
-                checked={showMap}
-              />
+            <div className="d-flex my-1 justify-content-between align-items-center align-content-center all-tours-title-block">
+
+              <h4 className="mr-2 mb-0">All Tours</h4>
+              <div className="d-flex align-items-center justify-content-between">
+                {showMap ? <Button variant="outline-secondary mr-3 header-filter-button" size="sm"
+                onClick={() => setModalShow(true)}>
+                  <span><i className="fa fa-filter"></i> Filters</span>
+                </Button> : null}
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  label="Show Map"
+                  className="text-nowrap show-map-toggle"
+                  onChange={() => setShowMap(!showMap)}
+                  checked={showMap}
+                />
+              </div>
             </div>
         </Row>
         <Dropdown.Divider className="m-0"/>
@@ -102,11 +122,12 @@ const AllTours: React.FC = () => {
           </Col>
         </Row>
       </Container>
-      <div className="btn-circle-fab d-lg-none" onClick={() => setModalShow(true)}><i className="fa fa-filter tour-icons"></i></div>
+      {!showMap ? <div className="btn-circle-fab d-lg-none" onClick={() => setModalShow(true)}><i className="fa fa-filter tour-icons"></i></div> : null}
+
       <TourModal show={modalShow} onHide={() => setModalShow(false)}
       closeText="Apply" header="Tour Filters">
         <TourFilter/>
-        </TourModal>
+      </TourModal>
     </React.Fragment>
   );
 };

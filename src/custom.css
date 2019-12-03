@@ -13,15 +13,15 @@
 }
 
 .custom-carousel-item-1 {
-  background-image: url("https://source.unsplash.com/Jy4-xk34q0s/2048x1536");
+  background-image: url("https://source.unsplash.com/Jy4-xk34q0s/2560x1920");
 }
 
 .custom-carousel-item-2 {
-  background-image: url("https://source.unsplash.com/dYYv2PMRMV8/2048x1536");
+  background-image: url("https://source.unsplash.com/dYYv2PMRMV8/2560x1920");
 }
 
 .custom-carousel-item-3 {
-  background-image: url("https://source.unsplash.com/pYFue5PzpcI/2048x1536");
+  background-image: url("https://source.unsplash.com/pYFue5PzpcI/2560x1920");
 }
 
 .wrapper {
@@ -218,8 +218,8 @@
 }
 
 .tour-map-container {
-  height: calc(100vh - 131px); /*56px navbar + ~75px titlebar*/
-  top: 131px;
+  height: calc(100vh - 116px); /*56px navbar + ~60px titlebar*/
+  top: 116px;
 }
 
 .all-tours-title {
@@ -235,7 +235,7 @@
 
 .all-tours-content {
   position: relative;
-  top: 74px;
+  top: 60px;
 }
 
 .all-tours-header-row {
@@ -313,6 +313,33 @@
   background-color: #000;
   border: 2px solid var(--primary);
   z-index: 1;
+}
+
+.tour-bottom-card {
+  min-height: 100px;
+  min-width: 300px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.yest {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 1201;
+  overflow-x: scroll;
+}
+
+.header-filter-button {
+  border-radius: 30px;
+  height: auto;
+  line-height: 0;
+}
+
+.show-map-toggle {
+  line-height:1.3
 }
 
 .pin {
@@ -439,9 +466,7 @@ No media query for `xs` since this is the default in Bootstrap*/
   .card-image-overlay {
     width: 70%;
   }
-  .tour-map-container {
-    
-  }
+  
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
