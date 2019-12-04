@@ -80,10 +80,11 @@ const AllTours: React.FC = () => {
 
               <h4 className="mr-2 mb-0">All Tours</h4>
               <div className="d-flex align-items-center justify-content-between">
-                {showMap ? <Button variant="outline-secondary mr-3 header-filter-button" size="sm"
-                onClick={() => setModalShow(true)}>
+                { showMap ? 
+                <Button variant="outline-secondary" className="mr-3 header-filter-button" size="sm" onClick={() => setModalShow(true)}>
                   <span><i className="fa fa-filter"></i> Filters</span>
-                </Button> : null}
+                </Button> : 
+                null }
                 <Form.Check
                   type="switch"
                   id="custom-switch"

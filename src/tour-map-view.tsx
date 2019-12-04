@@ -268,7 +268,8 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     const newPlaces = [...this.props.places]
     newPlaces.forEach((place: Place) => (place.map.focused = false));
     const currentPlace = this.getPlaceById(place.id, newPlaces)
-    currentPlace.map.focused = true
+    if(typeof currentPlace !== 'undefined')
+      currentPlace.map.focused = true
     this.props.updatePlaces(newPlaces)
   }
 
