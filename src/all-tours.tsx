@@ -25,7 +25,6 @@ const AllTours: React.FC = () => {
   //Runs only on mount & unmount once because empty dependency array as argument
   const mapRef = useRef<TourCardMap>(null);
   useEffect(() => {
-    console.log("---Effect start---")
     fetch('places.json')
       .then(response => response.json())
       .then(data => {
@@ -37,14 +36,9 @@ const AllTours: React.FC = () => {
           result.map = initMap
         });
         setPlaces(data.results)
-        console.log("Mounting end")
       })
       .catch(err => console.log(err))
   }, [])
-
-  useEffect(() => {
-    console.log("*** All Updates Effect ***")
-  })
 
   const findCollectionById = <T, K extends keyof T>(id: React.ReactText, collection: T[]) => {
     id = typeof id === 'string' ? parseInt(id, 10) : id
@@ -67,14 +61,7 @@ const AllTours: React.FC = () => {
   const updatePlaceMarker = (placeId: Place["id"], mapParam: keyof Place["map"], mapValue: boolean) => {
     let newPlaces = [...places]
     const currentPlace = findCollectionById(placeId, newPlaces)
-    //debugger
-    console.log("-----********--------")
-    console.log("placeId ", placeId)
-    console.log("mapParam", mapParam)
-    console.log("mapValue", mapValue)
     if(typeof currentPlace !== 'undefined') {
-      console.log("currentPlaceMap", currentPlace.map)
-      console.log("-----********--------")
       if(mapParam === "show_info" && currentPlace.map.show_info !== mapValue) {
         if(mapRef && mapRef.current) {
           mapRef.current.handleActiveMarker(placeId)

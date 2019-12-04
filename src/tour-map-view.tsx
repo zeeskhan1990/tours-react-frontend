@@ -13,12 +13,6 @@ type InfoWindowProps = {
 };
 
 const InfoWindow: React.FC<InfoWindowProps> = ({ place }) => {
-  const handleClick = (ev: any) => {
-    ev.preventDefault();
-    //Preventing bubbling up of event to map body
-    ev.stopPropagation();
-    //console.log("Click on Info Captured", ev)
-  };
   return (
     <Card border="primary" style={{ width: "274px", zIndex: 1 }}>
       <Card.Img
@@ -124,7 +118,6 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
   }
 
   getPlaceById = (id: number | string, places?: Place[]) => {
-    debugger
     id = typeof id === "string" ? parseInt(id, 10) : id;
     if(typeof places === 'undefined') {
       places = this.props.places
@@ -137,7 +130,6 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     const { places } = allProps;
     places.forEach((place: Place) => (place.map.show_info = false));
     this.props.updatePlaces(places);
-    console.log("InVOKED Update Places from Close Window!");
   };
 
   defocusAllMarkers = () => {
@@ -145,7 +137,6 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     const { places } = allProps;
     places.forEach((place: Place) => (place.map.focused = false));
     this.props.updatePlaces(places);
-    console.log("DeFocused all markers!");
   };
 
   repositionMap = (activePlace: Place) => {
@@ -185,13 +176,6 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     const swPoint = overlay
       .getProjection()
       .fromLatLngToContainerPixel(swLatLang);
-    console.log(
-      "--- All points ---",
-      clickedMarkerPoint,
-      centerPoint,
-      nePoint,
-      swPoint
-    );
 
     const xPos = infoWindowWidth + clickedMarkerPoint.x;
     const yPos = infoWindowHeight + clickedMarkerPoint.y;
@@ -227,7 +211,6 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
     let activePlace = places.find(
       (currentPlace: any) => currentPlace.id === placeId
     );
-    console.log("Active place", activePlace);
     if (typeof activePlace !== "undefined") {
       this.setState({showPlacesSlider: false})
       this.closeAllInfoWindows();
@@ -239,14 +222,10 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
 
   // onChildClick callback can take two arguments: key and childProps
   onChildClickCallback = (key: any, clickedMarkerProps: any) => {
-    console.log("key - ", key);
-    console.log("props - ", clickedMarkerProps);
     this.handleActiveMarker(key)
   };
 
   handleMapClick = (clickedProps: any) => {
-    console.log("---- Click on Map Body Captured ---");
-    console.log(clickedProps);
     if(!this.state.hasActiveInfo) {
       this.setState((state, props) => {
         return {showPlacesSlider: !state.showPlacesSlider}
@@ -276,18 +255,11 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
   };
 
   handleChange = (changeProps: any) => {
-    console.log("Change noted...");
-    console.log(changeProps);
     this.setState({ mapParams: changeProps });
   };
 
   handleGoogleApiLoad = (map: any, maps: any, places: Place[]) => {
-    console.log("Google API LOADED...");
     this.setState({ mapInstance: map });
-    console.log(map);
-    console.log(map.getDiv().offsetWidth);
-    console.log(map.getDiv().offsetHeight);
-    console.log(map.getBounds());
     onApiLoad(map, maps, places);
   };
 
@@ -302,8 +274,6 @@ class TourCardMap extends React.Component<TourCardMapProps, TourCardMapState> {
 
   render() {
     const { places } = this.props;
-    console.log(" In Map Render - Places Now");
-    console.log(places);
     return (
       <React.Fragment>
       <div className="tour-map-container sticky-top">

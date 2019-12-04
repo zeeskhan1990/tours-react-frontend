@@ -367,6 +367,7 @@
 .pin-over {
   background-color: #000;
   color: #fff;
+  z-index: 1;
 }
 .pin-pressed {
   background-color: var(--primary);
