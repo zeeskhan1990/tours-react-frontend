@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/tours-react-frontend/static/css/main.45f5cb48.chunk.css",
+    "main.js": "/tours-react-frontend/static/js/main.9400ef2f.chunk.js",
+    "main.js.map": "/tours-react-frontend/static/js/main.9400ef2f.chunk.js.map",
+    "runtime-main.js": "/tours-react-frontend/static/js/runtime-main.3aff6d3a.js",
+    "runtime-main.js.map": "/tours-react-frontend/static/js/runtime-main.3aff6d3a.js.map",
+    "static/css/2.17e5ed98.chunk.css": "/tours-react-frontend/static/css/2.17e5ed98.chunk.css",
+    "static/js/2.959f641f.chunk.js": "/tours-react-frontend/static/js/2.959f641f.chunk.js",
+    "static/js/2.959f641f.chunk.js.map": "/tours-react-frontend/static/js/2.959f641f.chunk.js.map",
+    "index.html": "/tours-react-frontend/index.html",
+    "precache-manifest.36e2218028c3e1be80d50408c82a4533.js": "/tours-react-frontend/precache-manifest.36e2218028c3e1be80d50408c82a4533.js",
+    "service-worker.js": "/tours-react-frontend/service-worker.js",
+    "static/css/2.17e5ed98.chunk.css.map": "/tours-react-frontend/static/css/2.17e5ed98.chunk.css.map",
+    "static/css/main.45f5cb48.chunk.css.map": "/tours-react-frontend/static/css/main.45f5cb48.chunk.css.map"
+  }
+}
