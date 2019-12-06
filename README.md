@@ -5,7 +5,7 @@ A simple [create-react-app](CRA-README.md) setup, showcasing a working front end
 for a tour app. This is ultimately meant to serve as the front end for the
 express-tours api endpoints which are also in my repository.
 
-** Proper folder structuring is missing, so are usage of any styling solution. This is a rough proof of concept, the actual project should abide by proper guidelines and best practices **
+**Proper folder structuring is missing, so are usage of any styling solution. This is a rough proof of concept, the actual project should abide by proper guidelines and best practices**
 
 The live app in codesandbox can be found here:  
 <https://g4dfy.csb.app/>
