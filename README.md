@@ -8,7 +8,7 @@ express-tours api endpoints which are also in my repository.
 **Proper folder structuring is missing, so are usage of any styling solution. This is a rough proof of concept, the actual project should abide by proper guidelines and best practices**
 
 The live app in codesandbox can be found here:  
-<https://g4dfy.csb.app/>
+<https://4h0tg.csb.app/>
 
 **Following Technologies/Libraries have been used here :**
 
